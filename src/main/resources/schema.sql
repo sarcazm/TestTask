@@ -1,3 +1,4 @@
+/*
 create table CAR (
   id IDENTITY primary key,
   brand VARCHAR2(150),
@@ -15,4 +16,4 @@ create table AIRPLANE (
   year_of_issue YEAR,
   fuelCapacity INT,
   seats INT
-);
+);*/
