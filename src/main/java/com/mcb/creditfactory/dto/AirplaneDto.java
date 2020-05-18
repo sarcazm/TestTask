@@ -22,7 +22,7 @@ public class AirplaneDto implements Collateral{
     private Short year;
     private Integer fuelCapacity;
     private Integer seats;
-    private List<AirplaneValue> value;
+    private List<AirplaneValue> values;
 
 
 }

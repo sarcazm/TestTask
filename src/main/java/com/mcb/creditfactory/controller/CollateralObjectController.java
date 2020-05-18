@@ -22,7 +22,8 @@ public class CollateralObjectController {
 
     @PostMapping("/collateral/info")
     public HttpEntity<Collateral> getInfo(@RequestBody Collateral object) {
-        System.out.println(object);
+        System.out.println("object.getClass() = " + object.getClass());
+        System.out.println("object = " + object);
         Collateral info = service.getInfo(object);
         return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
     }
