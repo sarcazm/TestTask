@@ -21,8 +21,7 @@ public class CollateralService {
 
     @SuppressWarnings("ConstantConditions")
     public Long saveCollateral(Collateral object)  {
-        //тут по хорошему, прежде чем сохранять, надо бы поискать. имеется ли данный объект уже у нас в базе
-        //плюс надо знать, как мы будем идентифицировать наш объект обеспечения
+        //это бы я убрал и написал бы. Но так придется делать для всех в дальнейшем обеспечений
         checkNull(object);
         boolean approved;
         CarDto carDto = null;
@@ -30,9 +29,6 @@ public class CollateralService {
         if (object instanceof CarDto) {
             carDto = (CarDto) object;
             approved = carService.approve(carDto);
-            if (!approved) {
-                return null;
-            }
             return Optional.of(carDto)
                     .map(carService::fromDto)
                     .map(carService::save)
@@ -41,9 +37,6 @@ public class CollateralService {
         }else if (object instanceof AirplaneDto) {
             airplaneDto = (AirplaneDto) object;
             approved = airplaneService.approve(airplaneDto);
-            if (!approved) {
-                return null;
-            }
             return Optional.of(airplaneDto)
                     .map(airplaneService::fromDto)
                     .map(airplaneService::save)
@@ -52,7 +45,7 @@ public class CollateralService {
         }else return null;
 
         //их код
-        /*if (!(object instanceof CarDto)) {
+        /*if ((!(object instanceof CarDto)) || (!(object instanceof AirplaneDto))) {
             throw new IllegalArgumentException();
         }
 

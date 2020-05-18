@@ -1,11 +1,11 @@
 package com.mcb.creditfactory.external;
 
-
-
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public interface CollateralObject {
-    List<CollateralValue> getValues();
+    BigDecimal getValue();
     Short getYear();
+    LocalDate getDate();
     CollateralType getType();
 }
