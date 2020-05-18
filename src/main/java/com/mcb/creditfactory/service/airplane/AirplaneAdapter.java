@@ -5,17 +5,16 @@ import com.mcb.creditfactory.external.CollateralObject;
 import com.mcb.creditfactory.external.CollateralType;
 import lombok.AllArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 public class AirplaneAdapter implements CollateralObject {
 
     private AirplaneDto airplaneDto;
-    //Этот метод получается не нужен?
+
     @Override
-    public BigDecimal getValue() {
-        return null;
+    public List getValues() {
+        return airplaneDto.getValues();
     }
 
     @Override
@@ -23,10 +22,10 @@ public class AirplaneAdapter implements CollateralObject {
         return airplaneDto.getYear();
     }
 
-    @Override
+    /*@Override
     public LocalDate getDate() {
         return LocalDate.now();
-    }
+    }*/
 
     @Override
     public CollateralType getType() {

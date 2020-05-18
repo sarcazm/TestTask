@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +23,8 @@ public class Car {
 
     @Column(name = "year_of_issue")
     private Short year;
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    private List<CarValue> values;
 
-    @Column(name = "assessed_value")
-    private BigDecimal value;
+
 }

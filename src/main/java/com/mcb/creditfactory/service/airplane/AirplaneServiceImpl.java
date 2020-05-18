@@ -45,7 +45,7 @@ public class AirplaneServiceImpl implements AirplaneService{
                 dto.getYear(),
                 dto.getFuelCapacity(),
                 dto.getSeats(),
-                dto.getValue()
+                dto.getValues()
         );
     }
 

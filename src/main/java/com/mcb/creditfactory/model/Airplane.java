@@ -32,16 +32,4 @@ public class Airplane{
     @OneToMany(mappedBy = "airplane", fetch = FetchType.LAZY)
     private List<AirplaneValue> values;
 
-    @Override
-    public String toString() {
-        return "Airplane{" +
-                "id=" + id +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", year=" + year +
-                ", fuelCapacity=" + fuelCapacity +
-                ", seats=" + seats +
-                '}';
-    }
 }

@@ -2,6 +2,7 @@ package com.mcb.creditfactory.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mcb.creditfactory.external.CollateralValue;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,9 +13,7 @@ import java.time.LocalDate;
 @Table(name = "airplane_assessed_value")
 @Data
 
-public class AirplaneValue {
-    //как тут грамотно сделать?
-    //
+public class AirplaneValue implements CollateralValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +22,7 @@ public class AirplaneValue {
     @JoinColumn(name = "airplane_id")
     private Airplane airplane;
     @Column(name = "date")
-    private LocalDate localDate;
+    private LocalDate date;
     @Column(name = "value")
     private BigDecimal value;
 
@@ -33,7 +32,7 @@ public class AirplaneValue {
     public String toString() {
         return "AirplaneValue{" +
                 "id=" + id +
-                ", localDate=" + localDate +
+                ", localDate=" + date +
                 ", value=" + value +
                 '}';
     }
