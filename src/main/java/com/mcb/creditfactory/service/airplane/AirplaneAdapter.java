@@ -22,11 +22,6 @@ public class AirplaneAdapter implements CollateralObject {
         return airplaneDto.getYear();
     }
 
-    /*@Override
-    public LocalDate getDate() {
-        return LocalDate.now();
-    }*/
-
     @Override
     public CollateralType getType() {
         return CollateralType.AIRPLANE;

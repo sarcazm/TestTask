@@ -25,7 +25,7 @@ public class CollateralService {
         boolean approved;
         CarDto carDto = null;
         AirplaneDto airplaneDto = null;
-        System.out.println("object = " + object);
+
         if (object instanceof CarDto) {
             carDto = (CarDto) object;
             approved = carService.approve(carDto);
@@ -40,38 +40,16 @@ public class CollateralService {
         }else if (object instanceof AirplaneDto) {
             airplaneDto = (AirplaneDto) object;
             approved = airplaneService.approve(airplaneDto);
-            System.out.println("approved = " + approved);
+
             if (!approved) {
                 return null;
             }
-/*            Airplane airplane = airplaneService.save(airplaneService.fromDto(airplaneDto));
-            System.out.println("airplane = " + airplane);*/
             return Optional.of(airplaneDto)
                     .map(airplaneService::fromDto)
                     .map(airplaneService::save)
                     .map(airplaneService::getId)
                     .orElse(null);
         }else return null;
-
-        //их код
-        /*if (!(object instanceof CarDto)) {
-            throw new IllegalArgumentException();
-        }
-
-        CarDto car = (CarDto) object;
-        boolean approved = carService.approve(car);
-        if (!approved) {
-            return null;
-        }
-
-        return Optional.of(car)
-                .map(carService::fromDto)
-                .map(carService::save)
-                .map(carService::getId)
-                .orElse(null);
-
-         */
-
     }
 
     public Collateral getInfo(Collateral object) {

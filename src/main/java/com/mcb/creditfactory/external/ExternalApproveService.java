@@ -18,8 +18,6 @@ public class ExternalApproveService {
 
 
     public int approve(CollateralObject object) {
-        System.out.println("object inner ExternalApproveService");
-
         for (CollateralValue collateralValue : object.getValues())
         {
             if (collateralValue.getDate() == null || collateralValue.getValue() == null)
@@ -29,19 +27,12 @@ public class ExternalApproveService {
             return -1;
         }
 
-        /*public int approve(CollateralObject object) {
-            if (object.getDate() == null ||object.getYear() == null || object.getValue() == null || object.getType() == null) {
-                return -1;
-            }*/
-
         int code;
         switch (object.getType()) {
             case CAR: code = approveCar(object); break;
             case AIRPLANE: code = approvePlane(object); break;
             default: code = -100;
         }
-
-        System.out.println("code = " + code);
 
         return code;
     }
@@ -76,7 +67,6 @@ public class ExternalApproveService {
         if (object.getYear() < MIN_PLANE_YEAR) {
             return -20;
         }
-
         return 0;
     }
 }

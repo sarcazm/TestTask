@@ -17,15 +17,11 @@ public class CollateralObjectController {
     @PostMapping("/collateral/save")
     public HttpEntity<Long> save(@RequestBody Collateral object) {
         Long id = service.saveCollateral(object);
-        System.out.println("object.getClass() = " + object.getClass());
-        System.out.println("object = " + object);
         return id != null ? ResponseEntity.ok(id) : ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/collateral/info")
     public HttpEntity<Collateral> getInfo(@RequestBody Collateral object) {
-        System.out.println("object.getClass() = " + object.getClass());
-        System.out.println("object = " + object);
         Collateral info = service.getInfo(object);
         return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
     }
