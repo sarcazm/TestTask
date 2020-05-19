@@ -18,10 +18,21 @@ public class ExternalApproveService {
 
 
     public int approve(CollateralObject object) {
-        CollateralValue collateralValue = object.getValues().get(0);
-        if (collateralValue.getDate() == null || collateralValue.getValue() == null || object.getType() == null) {
+        System.out.println("object inner ExternalApproveService");
+
+        for (CollateralValue collateralValue : object.getValues())
+        {
+            if (collateralValue.getDate() == null || collateralValue.getValue() == null)
+                return -1;
+        }
+        if (object.getType() == null) {
             return -1;
         }
+
+        /*public int approve(CollateralObject object) {
+            if (object.getDate() == null ||object.getYear() == null || object.getValue() == null || object.getType() == null) {
+                return -1;
+            }*/
 
         int code;
         switch (object.getType()) {
@@ -29,6 +40,8 @@ public class ExternalApproveService {
             case AIRPLANE: code = approvePlane(object); break;
             default: code = -100;
         }
+
+        System.out.println("code = " + code);
 
         return code;
     }
@@ -49,16 +62,19 @@ public class ExternalApproveService {
     }
 
     private int approvePlane(CollateralObject object) {
-        CollateralValue collateralValue = object.getValues().get(0);
-        if (object.getYear() < MIN_PLANE_YEAR) {
-            return -20;
+        for (CollateralValue collateralValue : object.getValues())
+        {
+            if (collateralValue.getDate().isBefore(MIN_ASSESS_DATE)) {
+                return -21;
+            }
+            if (collateralValue.getValue().compareTo(MIN_PLANE_VALUE) < 0) {
+                return -22;
+            }
         }
 
-        if (collateralValue.getDate().isBefore(MIN_ASSESS_DATE)) {
-            return -21;
-        }
-        if (collateralValue.getValue().compareTo(MIN_PLANE_VALUE) < 0) {
-            return -22;
+
+        if (object.getYear() < MIN_PLANE_YEAR) {
+            return -20;
         }
 
         return 0;

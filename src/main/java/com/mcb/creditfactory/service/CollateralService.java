@@ -21,12 +21,11 @@ public class CollateralService {
 
     @SuppressWarnings("ConstantConditions")
     public Long saveCollateral(Collateral object)  {
-        //тут по хорошему, прежде чем сохранять, надо бы поискать. имеется ли данный объект уже у нас в базе
-        //плюс надо знать, как мы будем идентифицировать наш объект обеспечения
         checkNull(object);
         boolean approved;
         CarDto carDto = null;
         AirplaneDto airplaneDto = null;
+        System.out.println("object = " + object);
         if (object instanceof CarDto) {
             carDto = (CarDto) object;
             approved = carService.approve(carDto);
@@ -41,9 +40,12 @@ public class CollateralService {
         }else if (object instanceof AirplaneDto) {
             airplaneDto = (AirplaneDto) object;
             approved = airplaneService.approve(airplaneDto);
+            System.out.println("approved = " + approved);
             if (!approved) {
                 return null;
             }
+/*            Airplane airplane = airplaneService.save(airplaneService.fromDto(airplaneDto));
+            System.out.println("airplane = " + airplane);*/
             return Optional.of(airplaneDto)
                     .map(airplaneService::fromDto)
                     .map(airplaneService::save)

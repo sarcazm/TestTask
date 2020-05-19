@@ -29,7 +29,7 @@ public class Airplane{
     private Integer fuelCapacity;
     private Integer seats;
 
-    @OneToMany(mappedBy = "airplane", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "airplane", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AirplaneValue> values;
 
 }
